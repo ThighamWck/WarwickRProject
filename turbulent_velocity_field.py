@@ -2,7 +2,7 @@
 #################### 
 # Turbulent velocity field - for Fourth Year Project
 # Author - Thomas Higham and Tobias Grafke. Adapted from incompressible Navier Stokes code by Tobias.
-# Date - 25/04/25
+# Date - 25/03/25
 # University of Warwick
 #####################
 # """

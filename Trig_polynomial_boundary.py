@@ -1,3 +1,14 @@
+
+"""
+#################### 
+# Generate domain boundaries - for Fourth Year Project
+# Author - Thomas Higham
+# Date - 31/03/25
+# University of Warwick
+#####################
+# """
+
+
 from autograd import numpy as anp
 
 def generate_trig_functions(Print, num_terms_range=(1, 8)):
@@ -20,7 +31,7 @@ def generate_trig_functions(Print, num_terms_range=(1, 8)):
     # Keep all operations in autograd numpy
     y_vals = anp.linspace(0, 1, 200)
     max_phi = 3*anp.max(anp.abs(phi(y_vals))) + anp.mean(anp.abs(phi(y_vals)))
-    max_psi = 3*anp.max(anp.abs(psi(y_vals))) + anp.mean(anp.abs(psi(y_vals)))
+    max_psi = 33*anp.max(anp.abs(psi(y_vals))) + anp.mean(anp.abs(psi(y_vals)))
 
     if Print == True:
         def build_symbolic(coeffs, max_val):

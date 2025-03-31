@@ -1,3 +1,15 @@
+
+"""
+#################### 
+# Non-square domain training data generator - for Fourth Year Project
+# Author - Thomas Higham
+# Date - 31/03/25
+# University of Warwick
+#####################
+Initialisations is in main function at bottom
+# """
+
+
 import numpy as np
 import pandas as pd
 import autograd.numpy as anp

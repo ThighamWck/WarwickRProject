@@ -1,4 +1,15 @@
 
+"""
+#################### 
+# Fourier Neural Operator trainer for non-square domains - for Fourth Year Project
+# Author - Thomas Higham
+# Date - 31/03/25
+# University of Warwick
+#####################
+Initialisations is in main function at bottom
+# """
+
+
 # ===============================
 # IMPORT LIBRARIES
 # ===============================
@@ -22,6 +33,7 @@ print(f"Using device: {device}")
 
 # ===============================
 # LOAD AND PREPARE DATA
+"""Specify gridsize here """
 # ===============================
 class PDEOperatorDataset(Dataset):
     def __init__(self, grouped_data, grid_size=32):
@@ -99,7 +111,7 @@ class FNO2D(nn.Module):
         # Final linear layers
         x = x.permute(0, 2, 3, 1)  # [B, 16, 16, width]
         # x = self.fc1(x).gelu() #changed to gelu from relu
-        x = F.gelu(self.fc1(x))  # Correct: applying GELU via the functional API
+        x = F.gelu(self.fc1(x))  # Applying GELU activation
 
         x = self.fc2(x)
         return x.permute(0, 3, 1, 2)  # [B, out_channels, 16, 16]
@@ -107,6 +119,7 @@ class FNO2D(nn.Module):
 
 # ===============================
 # LOAD CSV AND CREATE DATASET
+"""Specify gridsize here """
 # ===============================
 def load_data(csv_path, grid_size=32):
     # Load CSV
@@ -121,37 +134,9 @@ def load_data(csv_path, grid_size=32):
 
     return dataloader
 
-
-# # ===============================
-# # TRAINING LOOP
-# # ===============================
-# def train_model(model, dataloader, num_epochs=200, lr=0.001):
-#     optimizer = optim.Adam(model.parameters(), lr=lr)
-#     criterion = nn.MSELoss()
-
-#     for epoch in range(num_epochs):
-#         model.train()
-#         epoch_loss = 0.0
-
-#         for batch_idx, (x, y) in enumerate(dataloader):
-#             x, y = x.to(device), y.to(device).unsqueeze(1)
-
-#             # Forward pass
-#             outputs = model(x)
-#             loss = criterion(outputs, y)
-
-#             # Backpropagation
-#             optimizer.zero_grad()
-#             loss.backward()
-#             optimizer.step()
-
-#             epoch_loss += loss.item()
-
-#         print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {epoch_loss / len(dataloader):.6f}")
-
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
-def train_model(model, dataloader, num_epochs=80, lr=0.001, lr_final=1e-5):
+def train_model(model, dataloader, num_epochs=85, lr=0.001, lr_final=1e-5):
     optimizer = optim.Adam(model.parameters(), lr=lr)
     criterion = nn.MSELoss()
     
@@ -194,13 +179,13 @@ def main():
     dataloader = load_data(csv_path)
 
     # Initialize model with 5 input channels instead of 4
-    model = FNO2D(in_channels=5, out_channels=1, modes1=20, modes2=20, width=256).to(device)
+    model = FNO2D(in_channels=5, out_channels=1, modes1=16, modes2=16, width=256).to(device)
 
     # Train the model
     train_model(model, dataloader)
 
     # Save the model after training
-    torch.save(model.state_dict(), 'data_32_transform_5000_test_1_1.pth')
+    torch.save(model.state_dict(), 'data_32_transform_5000_test_1_.pth')
     print('Model saved successfully!')
 
 # Run main if script is executed

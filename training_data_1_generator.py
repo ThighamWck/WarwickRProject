@@ -1,3 +1,14 @@
+
+"""
+#################### 
+# Square domain training data generator - for Fourth Year Project
+# Author - Thomas Higham
+# Date - 31/03/25
+# University of Warwick
+#####################
+Initialisations is in main function at bottom
+# """
+
 import numpy as np
 import pandas as pd
 import autograd.numpy as anp
@@ -73,6 +84,8 @@ def generate_training_1(num_solutions, grid_size):
                 rho_val = rho[coarse_indices_i[i,j], coarse_indices_j[i,j]]
                 #qplus_val = qplus[coarse_indices_i[i,j], coarse_indices_j[i,j]]
                 data_list.append([solution_id, x_ij, y_ij, b1, b2, rho_val])
+
+        ## Commented code generates csv file with all the points from the finite difference tester stored.
         # for i in range(n_fine):
         #     for j in range(n_fine):
         #         x_ij = X1[i,j]
